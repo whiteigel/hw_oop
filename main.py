@@ -7,6 +7,7 @@ class Student:
         self.courses_in_progress = []
         self.grades = {}
         self.grade_avg = 0
+        self.cip_line_res = 0
 
     def set_grade (self, lecturer, course_lect, grade_lect):
         if isinstance(lecturer, Lecturer) and course_lect in lecturer.courses_attached and course_lect in self.courses_in_progress:
@@ -27,9 +28,10 @@ class Student:
 
     def __str__(self):
         self.get_avg_hw_score(self.grades)
+        # self.cip_line(self.courses_in_progress)
         res = f'Имя: {self.name}, Фамилия: {self.surname}, Средняя оценка за домашние задания: {self.grade_avg}, '\
-              f'Курсы в процессе изучения: {self.courses_in_progress[0]}, '\
-              f'Завершенные курсы: {self.finished_courses[0]}'
+              f'Курсы в процессе изучения: {self.courses_in_progress}, '\
+              f'Завершенные курсы: {self.finished_courses}'
         return res
 
     def __lt__(self, other):
@@ -150,7 +152,6 @@ mr_orange.rate_hw(jake,'Python', 10)
 mr_orange.rate_hw(jane,'Git', 10)
 mr_orange.rate_hw(jane,'Git', 9)
 mr_orange.rate_hw(jane,'Python', 8)
-
 
 print(jane)
 
