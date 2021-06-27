@@ -33,10 +33,9 @@ class Student:
     # redifining student's __str__
 
     def __str__(self):
-        self.get_avg_hw_score(self.grades)
-        # self.cip_line(self.courses_in_progress)
-        res = f'Имя: {self.name}, Фамилия: {self.surname}, Средняя оценка за домашние задания: {self.grade_avg}, '\
-              f'Курсы в процессе изучения: {self.courses_in_progress}, '\
+        avg_hw_scr = self.get_avg_hw_score(self.grades)
+        res = f'Имя: {self.name}, \n Фамилия: {self.surname},\n Средняя оценка за домашние задания: {round(avg_hw_scr, 2)},\n '\
+              f'Курсы в процессе изучения: {self.courses_in_progress},\n '\
               f'Завершенные курсы: {self.finished_courses}'
         return res
 
@@ -56,8 +55,7 @@ class Mentor:
 
 class Lecturer(Mentor):
     def __init__(self, name, surname):
-        self.name = name
-        self.surname = surname
+        super().__init__(name, surname)
         self.courses_attached = []
         self.course_grade = {}
         self.course_grade_avg = 0
@@ -77,8 +75,8 @@ class Lecturer(Mentor):
     # redefining lecturers' __str__
 
     def __str__(self):
-        self.get_course_grade_avg(self.course_grade)
-        res = f'Имя: {self.name}, Фамилия: {self.surname}, Средняя оценка за лекции: {self.course_grade_avg}'
+        avg_course_grade = self.get_course_grade_avg(self.course_grade)
+        res = f'Имя: {self.name},\n Фамилия: {self.surname},\n Средняя оценка за лекции: {round(avg_course_grade,2)}'
         return res
 
     # redefining lecturers' __lt__
@@ -115,7 +113,7 @@ jane.courses_in_progress.append('Python')
 jane.courses_in_progress.append('Git')
 jane.finished_courses.append('Введение в программирование')
 
-jake = Student('Jake', 'The Sparrow', 'male')
+jake = Student('Jake', 'Smith', 'male')
 jake.courses_in_progress.append('Python')
 jake.courses_in_progress.append('Git')
 jake.finished_courses.append('Введение в программирование')
@@ -201,21 +199,21 @@ def lecturer_grade_avg(lecturers, course):
 # printing results
 
 print()
-print(f'Student: {jane}')
+print(f'Student:\n {jane}')
 print()
-print(f'Student: {jake}')
+print(f'Student: \n {jake}')
 print()
-print(f'Mentor: {mr_brown.name} {mr_brown.surname}')
+print(f'Mentor:\n {mr_brown.name} {mr_brown.surname}')
 print()
-print(f'Mentor: {mr_black.name} {mr_black.surname}')
+print(f'Mentor:\n {mr_black.name} {mr_black.surname}')
 print()
-print(f'Reviewer: {mr_white}')
+print(f'Reviewer:\n {mr_white}')
 print()
-print(f'Reviewer: {mr_orange}')
+print(f'Reviewer:\n {mr_orange}')
 print()
-print(f'Lecturer: {mr_green}')
+print(f'Lecturer:\n {mr_green}')
 print()
-print(f'Lecturer: {mr_blue}')
+print(f'Lecturer:\n {mr_blue}')
 print()
 print(f"Средняя оценка Джейн за домашние задания выше чем у Джейка -",jane > jake)
 print()
