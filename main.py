@@ -7,7 +7,6 @@ class Student:
         self.courses_in_progress = []
         self.grades = {}
         self.grade_avg = 0
-        self.cip_line_res = 0
 
     # students can grade lecturers for lectures
 
@@ -30,13 +29,20 @@ class Student:
         self.grade_avg = score / cnt
         return self.grade_avg
 
+    def course_list_to_string(self, course_list):
+        lst = course_list
+        separator = ', '
+        return separator.join(lst)
+
     # redifining student's __str__
 
     def __str__(self):
+        course_in_progress_list = self.course_list_to_string(self.courses_in_progress)
+        finished_cources_list = self.course_list_to_string(self.finished_courses)
         avg_hw_scr = self.get_avg_hw_score(self.grades)
-        res = f'Имя: {self.name}, \n Фамилия: {self.surname},\n Средняя оценка за домашние задания: {round(avg_hw_scr, 2)},\n '\
-              f'Курсы в процессе изучения: {self.courses_in_progress},\n '\
-              f'Завершенные курсы: {self.finished_courses}'
+        res = f'Имя: {self.name} \n Фамилия: {self.surname}\n Средняя оценка за домашние задания: {round(avg_hw_scr, 2)}\n '\
+              f'Курсы в процессе изучения: {course_in_progress_list}\n '\
+              f'Завершенные курсы: {finished_cources_list}'
         return res
 
     # redifining student's __lt__
@@ -76,7 +82,7 @@ class Lecturer(Mentor):
 
     def __str__(self):
         avg_course_grade = self.get_course_grade_avg(self.course_grade)
-        res = f'Имя: {self.name},\n Фамилия: {self.surname},\n Средняя оценка за лекции: {round(avg_course_grade,2)}'
+        res = f'Имя: {self.name}\n Фамилия: {self.surname}\n Средняя оценка за лекции: {round(avg_course_grade,2)}'
         return res
 
     # redefining lecturers' __lt__
@@ -103,7 +109,7 @@ class Reviewer(Mentor):
     # redefining reviewer' __str__
 
     def __str__(self):
-        res = f'Имя: {self.name}, Фамилия: {self.surname}'
+        res = f'Имя: {self.name}\n Фамилия: {self.surname}'
         return res
 
 # populating environment with people and data
