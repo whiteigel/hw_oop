@@ -87,8 +87,7 @@ class Reviewer(Mentor):
             return 'Ошибка'
 
     def __str__(self):
-        res = f'Имя: {self.name}, ' \
-              f'Фамилия: {self.surname}'
+        res = f'Имя: {self.name}, Фамилия: {self.surname}'
         return res
 
 
@@ -113,6 +112,9 @@ mr_orange.courses_attached.append('Git')
 mr_brown = Mentor('John', 'Brown')
 mr_brown.courses_attached.append('Python')
 
+mr_black = Mentor('Erwin', 'Black')
+mr_black.courses_attached.append('Git')
+
 mr_green = Lecturer('Jack', 'Green')
 mr_green.courses_attached.append('Python')
 mr_green.courses_attached.append('Git')
@@ -122,20 +124,20 @@ mr_blue.courses_attached.append('Python')
 mr_blue.courses_attached.append('Git')
 
 jane.set_grade(mr_green,'Python', 9)
-jane.set_grade(mr_green,'Python', 10)
+jane.set_grade(mr_green,'Python', 7)
 jane.set_grade(mr_green,'Git', 9)
 
-jake.set_grade(mr_green,'Python', 10)
-jake.set_grade(mr_green,'Python', 9)
-jake.set_grade(mr_green,'Git', 7)
+jake.set_grade(mr_green,'Python', 6)
+jake.set_grade(mr_green,'Python', 7)
+jake.set_grade(mr_green,'Git', 5)
 
 jane.set_grade(mr_blue,'Python', 7)
 jane.set_grade(mr_blue,'Python', 8)
-jane.set_grade(mr_blue,'Git', 10)
+jane.set_grade(mr_blue,'Git', 3)
 
-jake.set_grade(mr_blue,'Python', 9)
-jake.set_grade(mr_blue,'Python', 6)
-jake.set_grade(mr_blue,'Git', 10)
+jake.set_grade(mr_blue,'Python', 5)
+jake.set_grade(mr_blue,'Python', 7)
+jake.set_grade(mr_blue,'Git',3)
 
 mr_white.rate_hw(jake,'Python', 8)
 mr_white.rate_hw(jake,'Git', 9)
@@ -153,18 +155,48 @@ mr_orange.rate_hw(jane,'Git', 10)
 mr_orange.rate_hw(jane,'Git', 9)
 mr_orange.rate_hw(jane,'Python', 8)
 
-print(jane)
+students = [jane, jake]
+def students_grade_avg(students, course):
+    res = 0
+    cnt = 0
+    for item in students:
+        for grades in item.grades[course]:
+            res += grades
+            cnt += 1
+    return f"Средняя оценка студентов на курсе {course} равна {res/cnt}"
 
-print(jake)
 
-print(mr_white)
+lect_list = [mr_green, mr_blue]
+def lecturer_grade_avg(lecturers, course):
+    res = 0
+    cnt = 0
+    for item in lecturers:
+        for grades in item.course_grade[course]:
+            res += grades
+            cnt += 1
+    return f"Средняя оценка лекторов за курс {course} равна {res/cnt}"
 
-print(mr_orange)
+print()
+print(f'Student: {jane}')
 
-print(mr_green)
+print(f'Student: {jake}')
 
-print(mr_blue)
+print(f'Mentor: {mr_brown.name} {mr_brown.surname}')
 
-print(jane > jake)
+print(f'Mentor: {mr_black.name} {mr_black.surname}')
 
-print(mr_green < mr_blue)
+print(f'Reviewer: {mr_white}')
+
+print(f'Reviewer: {mr_orange}')
+
+print(f'Lecturer: {mr_green}')
+
+print(f'Lecturer: {mr_blue}')
+
+print(f"Средняя оценка Джейн за домашние задания выше чем у Джейка -",jane > jake)
+
+print("Среднняя оценка за лекции, полученная мистером Грином, ниже чем оценка мистера Блу -",mr_green < mr_blue)
+
+print(students_grade_avg(students, 'Python'))
+
+print(lecturer_grade_avg(lect_list, 'Git'))
